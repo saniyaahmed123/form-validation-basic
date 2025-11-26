@@ -35,6 +35,7 @@ input{
     border: 0.3px solid white;
     padding: 10px;
 
+
 }
 input::placeholder{
     font-size: 17px;
@@ -53,14 +54,23 @@ input::placeholder{
      border: 0.3px solid white;
     padding: 10px;
     border-radius: 15px;
+    font-size: 17px;
     
 
 }
 img{
-    width: 135px;
+    width: 130px;
     height: 120px;
      text-align: center;
     justify-content: center;
     display: grid;
     padding-left: 26%;
+}
+h2{
+    margin-top: 40px;
+    justify-content: center;
+    display: grid;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e5e5e5;
 }

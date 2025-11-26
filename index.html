@@ -1,20 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Firebase Form</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <h2>Firebase Form → Save to Firestore</h2>
     <div class="container">
-        <form action="">
+        <form id="myForm">
             <img src="avatar.png" alt="">
-            <input type="text" name="text"placeholder="username" id="nameInput">
-            <input type="password" name="password" placeholder="name" id="passswordInput">
-            <button class="btn" id="btn">submit</button>
+            <input type="text" id="name" placeholder="Enter your name" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn">Submit</button>
         </form>
     </div>
-    <script src="index.js"></script>
+
+    <p id="msg"></p>
+
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBcizAQ2iH0YVAf1fq4CNcd6_zRx6G_SwI",
+            authDomain: "assignment1-6ce50.firebaseapp.com",
+            projectId: "assignment1-6ce50",
+            storageBucket: "assignment1-6ce50.firebasestorage.app",
+            messagingSenderId: "267252751134",
+            appId: "1:267252751134:web:2fd65805e848b86f00870f",
+            measurementId: "G-V67R8K6ZRE"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        //handle form submit
+
+        document.getElementById('myForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            saveData();
+        });
+
+        // Save Data Function
+        function saveData() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            if (name && email) {
+                db.collection('students').add({
+                    name: name,
+                    email: email,
+                    timestamp: new Date()
+                })
+                    .then(() => {
+                        alert('data saved successfully')
+
+                        document.getElementById('name').value = "";
+                        document.getElementById('email').value = "";
+                    });
+
+            } else {
+                alert('fill in both fields')
+            }
+
+        }
+    </script>
+
 </body>
+
 </html>
